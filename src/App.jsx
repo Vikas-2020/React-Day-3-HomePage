@@ -1,30 +1,44 @@
-import { useState } from 'react';
+import React from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // import './App.css';
-import './css/navbar.css'
-import Navbar from './components/Navbar';
+import First from "./pages/First";
+import Home from "./pages/Home";
+import Quote from "./pages/Quote";
+import Contact from "./pages/Contact";
+import Restaurant from "./pages/Resturent";
+import Notfound from "./pages/Notfound";
 
-import './css/section1.css'
-import Section1 from './components/Section1';
-
-import './css/section2.css'
-import Section2 from './components/Section2';
-
-import './css/section3.css'
-import Section3 from './components/Section3';
-
-import './css/footer.css'
-import Footer from './components/Footer'
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <First />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "/quote",
+        element: <Quote />,
+      },
+      {
+        path: "/contacts",
+        element: <Contact />,
+      },
+      {
+        path: "/restaurants",
+        element: <Restaurant />,
+      },
+      {
+        path: "*",
+        element: <Notfound />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <>
-      <Navbar />
-      <Section1 />
-      <Section2 />
-      <Section3 />
-      <Footer />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
